@@ -1,0 +1,17 @@
+group,ip,ok,file,reason
+Group_19,10.11.12.17,True,downloads/Group_19_10.11.12.17.pdf,
+Group_08,10.11.12.7,True,downloads/Group_08_10.11.12.7.pdf,
+Group_22,10.11.12.8,False,,decrypt_resp1_err: Expected: ASCII-armored PGP data
+Group_20,10.11.12.9,False,,"wV4DfLBU7s56vp8SAQdA017eHnF/hUXHAMC/AlbKdeGshILHuFX6VeluCCiE8hAw
+vCMGi1TKm2v2DG0FxEPt27oaIG7AgK6tpIK8nzekYr2DVw4Ps3BmH2D5r9OB3MdZ
+0ncBvkKgMRnHm/0WvAOSTMNAhB4xl3Baj86Vlb+Djx5FOQsdcd4Xuu8DWMdy7A+6
+525/7oE+4Qj5/F/HRGY68e0c5uB4arMvCbAhYlWbnRLbZMsHwsQQ9OXteCG49aT9
+DcKo2xiTyItLOXxnLC8JTRqGglspsCvOhg==
+=0h2u"
+Group_09,10.11.12.10,True,downloads/Group_09_10.11.12.10.pdf,
+Group_14,10.11.12.18,True,downloads/Group_14_10.11.12.18.pdf,
+Group_04,10.11.12.19,False,,post_init_failed(no_response)
+Group_26,10.11.12.12,True,downloads/Group_26_10.11.12.12.pdf,
+Group_03,10.11.12.13,True,downloads/Group_03_10.11.12.13.pdf,
+Group_07,10.11.12.14,True,downloads/Group_07_10.11.12.14.pdf,
+Group_24,10.11.12.15,False,,post_init_failed(no_response)

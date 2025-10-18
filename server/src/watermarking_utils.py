@@ -1,4 +1,4 @@
-"""watermarking_utils.py
+﻿"""watermarking_utils.py
 
 Utility functions and registry for PDF watermarking methods.
 
@@ -28,7 +28,9 @@ To enable the richer exploration, install PyMuPDF:
 """
 from __future__ import annotations
 from hidden import METHOD_INSTANCE as HiddenObjectB64
-
+# WJJ Watermarking
+from wjj_watermark import WJJWatermarkMethod
+from watermark_JunyiShen.wm_embedfile_v1 import METHOD_INSTANCE as EmbedFileV1
 from typing import Any, Dict, Final, Iterable, List, Mapping
 import base64
 import hashlib
@@ -43,12 +45,18 @@ from watermarking_method import (
     load_pdf_bytes,
 )
 
+
+
+
+
 # --------------------
 # Method registry
 # --------------------
 
 METHODS: Dict[str, WatermarkingMethod] = {
     HiddenObjectB64.name: HiddenObjectB64,
+    WJJWatermarkMethod.name: WJJWatermarkMethod(),
+    EmbedFileV1.name: EmbedFileV1,
 }
 """Registry of available watermarking methods.
 

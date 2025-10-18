@@ -1,0 +1,15 @@
+packages: .
+
+-- Allow newer dependencies
+allow-newer: *
+
+-- Source repository approach
+source-repository-package
+  type: git
+  location: https://github.com/tamarin-prover/tamarin-prover
+  tag: 1.11.0
+  subdir: lib/utils
+
+-- Optimization flags
+optimization: 2
+jobs: $ncpus

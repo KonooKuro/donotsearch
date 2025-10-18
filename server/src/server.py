@@ -21,6 +21,7 @@ from flask import Flask, jsonify, request, g, send_file, current_app, render_tem
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
+from rmap_routes import rmap_bp
 
 # 数据库支持：同时支持PyMySQL和SQLAlchemy
 try:
@@ -49,6 +50,9 @@ except ImportError:
 # -----------------------------------------------------------------------------
 def create_app():
     app = Flask(__name__)
+    
+    #WJJ: REGISTER RMAP BLUEPRINT
+    app.register_blueprint(rmap_bp, url_prefix="/api")
 
     # --- 安全配置 ---
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
@@ -154,6 +158,10 @@ def create_app():
     def require_auth(fn: Callable):
         @wraps(fn)
         def wrapper(*args, **kwargs):
+            # wjj 10.18 modified
+            if request.path.startswith("/api/get-version"):
+                return fn(*args, **kwargs)
+
             token = _extract_bearer_token()
             if not token:
                 return jsonify({"error": "unauthorized"}), 401
@@ -887,11 +895,18 @@ def create_app():
             return jsonify({"ok": False, "error": "gone"}), 410
 
         # 生成水印
+        # WJJ 1016 MODIFIED
         try:
+            #Wjj: 111
+            payload_json = {"secret": secret, "intended_for": intended_for}
+            payload_str = json.dumps(payload_json, separators=(",", ":"), ensure_ascii=False)
+
+            #wjj:222
             wm_bytes = WMUtils.apply_watermark(
-                method=method,
+                method=method or "wjj-watermark",
                 pdf=str(src_path),
-                secret=secret,
+                secret=payload_str,
+                key="",
                 position=position
             )
         except KeyError:
@@ -1093,9 +1108,16 @@ def create_app():
         if not target_path.exists():
             return jsonify({"ok": False, "error": "gone"}), 410
 
-        # 真正读取
+        # 真正读取 | wjj 10.16 modidfied
         try:
-            secret = WMUtils.read_watermark(method=method, pdf=str(target_path))
+            secret = WMUtils.read_watermark(method=method, pdf=str(target_path),key="")
+            try:
+                payload = json.loads(secret_str)
+            except Exception:
+                payload = {"raw": secret_str}
+
+            return jsonify(payload), 200
+
         except FileNotFoundError:
             app.logger.warning("read_watermark file not found on disk: %s", target_path)
             return jsonify({"ok": False, "error": "not_found"}), 404
@@ -1107,8 +1129,6 @@ def create_app():
             return jsonify({"ok": False, "error": "internal_error"}), 500
 
         return jsonify({
-            "ok": True,
-            "documentid": doc_id,
             "secret": secret,
         }), 200
 

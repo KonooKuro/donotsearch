@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-10-19",
+  "total_findings": 3,
+  "high_severity": 0,
+  "medium_severity": 3,
+  "findings": [
+    {
+      "endpoint": "/api/list-documents",
+      "token": "Bearer BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+      "status_code": 431,
+      "issue": "Unexpected auth response: 431",
+      "severity": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/upload-document",
+      "token": "Bearer BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+      "status_code": 431,
+      "issue": "Unexpected auth response: 431",
+      "severity": "MEDIUM"
+    },
+    {
+      "endpoint": "/api/list-all-versions",
+      "token": "Bearer BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+      "status_code": 431,
+      "issue": "Unexpected auth response: 431",
+      "severity": "MEDIUM"
+    }
+  ]
+}
