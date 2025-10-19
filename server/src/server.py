@@ -57,9 +57,6 @@ def create_app():
     # --- 安全配置 ---
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
-    
-    #WJJ: REGISTER RMAP BLUEPRINT
-    app.register_blueprint(rmap_bp, url_prefix="/api")
 
     # --- 安全配置 ---
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")

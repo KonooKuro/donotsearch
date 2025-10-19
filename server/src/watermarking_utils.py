@@ -98,10 +98,20 @@ def apply_watermark(
     pdf: PdfSource,
     secret: str,
     position: str | None = None,
+    key: str | None = None,
 ) -> bytes:
     """Apply a watermark using the specified method and return new PDF bytes."""
     m = get_method(method)
-    return m.add_watermark(pdf=pdf, secret=secret, position=position)
+    try:
+        # 优先尝试调用带 key 的版本
+        return m.add_watermark(pdf=pdf, secret=secret, position=position, key=key)
+    except TypeError as e:
+        # 如果是因为 key 参数不被接受而失败，则尝试不带 key 的版本
+        if "unexpected keyword argument 'key'" in str(e):
+            return m.add_watermark(pdf=pdf, secret=secret, position=position)
+        else:
+            # 如果是其他 TypeError，则重新抛出异常，避免隐藏别的 bug
+            raise
 
 def is_watermarking_applicable(
     method: str | WatermarkingMethod,
@@ -113,10 +123,19 @@ def is_watermarking_applicable(
     return m.is_watermark_applicable(pdf=pdf, position=position)
 
 
-def read_watermark(method: str | WatermarkingMethod, pdf: PdfSource) -> str:
+def read_watermark(method: str | WatermarkingMethod, pdf: PdfSource, key: str | None = None) -> str:
     """Recover a secret from ``pdf`` using the specified method."""
     m = get_method(method)
-    return m.read_secret(pdf=pdf)
+    try:
+        # 优先尝试调用带 key 的版本
+        return m.read_secret(pdf=pdf, key=key)
+    except TypeError as e:
+        # 如果是因为 key 参数不被接受而失败，则尝试不带 key 的版本
+        if "unexpected keyword argument 'key'" in str(e):
+            return m.read_secret(pdf=pdf)
+        else:
+            # 如果是其他 TypeError，则重新抛出异常
+            raise
 
 
 # --------------------
