@@ -1,7 +1,3 @@
-# Project README
-
-This README is intended to live in the **repository root** and satisfies the course requirements for setup, run, tests, coverage, and deployment. Replace paths as needed for your environment.
-
 ## Prerequisites
 - Docker and Docker Compose
 - (Optionally) Python 3.10+ for local tools and scripts
