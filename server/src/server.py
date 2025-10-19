@@ -56,6 +56,13 @@ def create_app():
 
     # --- 安全配置 ---
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
+    
+    #WJJ: REGISTER RMAP BLUEPRINT
+    app.register_blueprint(rmap_bp, url_prefix="/api")
+
+    # --- 安全配置 ---
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
     if not app.config["SECRET_KEY"]:
         raise ValueError("SECRET_KEY environment variable is required")
     
@@ -1112,9 +1119,9 @@ def create_app():
         try:
             secret = WMUtils.read_watermark(method=method, pdf=str(target_path),key="")
             try:
-                payload = json.loads(secret_str)
+                payload = json.loads(secret)
             except Exception:
-                payload = {"raw": secret_str}
+                payload = {"raw": secret}
 
             return jsonify(payload), 200
 
