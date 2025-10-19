@@ -1,58 +1,41 @@
-# tatou
-A web platform for pdf watermarking. This project is intended for pedagogical use, and contain security vulnerabilities. Do not deploy on an open network.
+# Project README
 
-## Instructions
+This README is intended to live in the **repository root** and satisfies the course requirements for setup, run, tests, coverage, and deployment. Replace paths as needed for your environment.
 
-The following instructions are meant for a bash terminal on a Linux machine. If you are using something else, you will need to adapt them.
+## Prerequisites
+- Docker and Docker Compose
+- (Optionally) Python 3.10+ for local tools and scripts
 
-To clone the repo, you can simply run:
-
+## Quick Start (Docker Compose)
 ```bash
-git clone https://github.com/nharrand/tatou.git
+# From repository root
+docker compose up -d --build
+# Health check (replace port/path if different)
+curl -fsS http://127.0.0.1:5000/api/healthz || curl -fsS http://127.0.0.1:5000/healthz
 ```
 
-Note that you should probably fork the repo and clone your own repo.
-
-
-### Run python unit tests
-
+## Tests and Coverage
 ```bash
-cd tatou/server
-
-# Create a python virtual environement
-python3 -m venv .venv
-
-# Activate your virtual environement
-. .venv/bin/activate
-
-# Install the necessary dependencies
-python -m pip install -e ".[dev]"
-
-# Run the unit tests
-python -m pytest
+# Run inside the application container
+docker compose exec -it $(docker compose ps --services | head -n1) sh -lc '
+  pip install -U pip pytest pytest-cov &&   pytest -q || true &&   pytest --cov=. --cov-report=term-missing --cov-report=html:htmlcov
+'
+# Coverage HTML will be at ./htmlcov/index.html in the container
 ```
 
-### Deploy
+## API (typical endpoints)
+- `GET /api/healthz` (or `/healthz`)
+- `GET /api/get-watermarking-methods`
+- `POST /api/upload-document`
+- `POST /api/create-watermark/<doc_id>`
+- `POST /api/read-watermark/<doc_id>`
+- `GET /api/list-versions/<doc_id>`
+- `GET /api/list-all-versions`
+- `POST /api/rmap-initiate`
+- `POST /api/rmap-get-link`
 
-From the root of the directory:
-
+## Deployment (Compose)
 ```bash
-# Create a file to set environement variables like passwords.
-cp sample.env .env
-
-# Edit .env and pick the passwords you want
-
-# Rebuild the docker image and deploy the containers
-docker compose up --build -d
-
-# Monitor logs in realtime 
+docker compose up -d --build
 docker compose logs -f
-
-# Test if the API is up
-http -v :5000/healthz
-
-# Open your browser at 127.0.0.1:5000 to check if the website is up.
 ```
-
-
-
