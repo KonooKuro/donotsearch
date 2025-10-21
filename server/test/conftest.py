@@ -1,137 +1,91 @@
+# -*- coding: utf-8 -*-
+# conftest.py — unify imports to src/, avoid duplicate modules in coverage,
+# and set sensible defaults for tests.
+
 import os
 import sys
-import json
-import base64
+import pathlib
 import importlib
+import contextlib
 import types
 import pytest
-from unittest.mock import MagicMock
 
-# --- 让 Python 能 import 到 src/ 包 ---
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # .../server
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
+# ---------------------------------------------------------------------
+# 1) Ensure src/ is on sys.path (before project root), so imports hit the real code
+# ---------------------------------------------------------------------
+ROOT = pathlib.Path(__file__).resolve().parents[1]   # e.g. .../server
+SRC = ROOT / "src"
 
-# --- stub pikepdf，避免导入时崩掉，并提供 open() ---
-if "pikepdf" not in sys.modules:
-    import types as _types
+for p in (str(SRC), str(ROOT)):
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
-    class _DummyPdf:
-        def __init__(self, *args, **kwargs):
-            pass
+# ---------------------------------------------------------------------
+# 2) Alias common top-level names to the *same* module objects under src.*
+#    This prevents the same file being imported twice under different names
+#    (e.g. "watermarking_utils" vs "src.watermarking_utils"), which would
+#    split coverage.
+# ---------------------------------------------------------------------
+def _alias(top_name: str, real_name: str):
+    """
+    Map a top-level import name to the canonical src.* module.
+    Example: _alias("watermarking_utils", "src.watermarking_utils")
+    """
+    mod = importlib.import_module(real_name)
+    sys.modules[top_name] = mod
+    return mod
 
-        def __enter__(self):
-            return self
+with contextlib.suppress(ModuleNotFoundError):
+    _alias("watermarking_utils", "src.watermarking_utils")
 
-        def __exit__(self, exc_type, exc, tb):
-            return False
+with contextlib.suppress(ModuleNotFoundError):
+    _alias("wjj_watermark", "src.wjj_watermark")
 
-        def save(self, *args, **kwargs):
-            return None
+# src/watermark_JunyiShen/wm_embedfile_v1.py
+with contextlib.suppress(ModuleNotFoundError):
+    _alias("wm_embedfile_v1", "src.watermark_JunyiShen.wm_embedfile_v1")
 
-        def close(self):
-            return None
+# ---------------------------------------------------------------------
+# 3) Set default environment variables used by the server (only if absent)
+# ---------------------------------------------------------------------
+os.environ.setdefault("SECRET_KEY", "test-secret")  # avoid 'SECRET_KEY required'
+# A temp storage root (tests can override)
+os.environ.setdefault("STORAGE_ROOT", str(ROOT / "tmp_storage"))
+# Typical Flask max payload (bytes). If your server reads this, it's available.
+os.environ.setdefault("MAX_CONTENT_LENGTH", "16777216")
+# If your code has optional RMAP/remote dependencies, you can disable by default.
+os.environ.setdefault("DISABLE_RMAP", "1")
 
-    pike_stub = _types.SimpleNamespace()
-    pike_stub.open = staticmethod(lambda *a, **k: _DummyPdf())
-    Pdf = _types.SimpleNamespace()
-    Pdf.open = staticmethod(lambda *a, **k: _DummyPdf())
-    pike_stub.Pdf = Pdf
-    pike_stub.Name = staticmethod(lambda s: s)
-    pike_stub.Object = object
-    pike_stub.Array = list
-    pike_stub.Dictionary = dict
+# ---------------------------------------------------------------------
+# 4) Minimal stub for optional third-party deps (only if missing)
+#    Here we create a tiny stub for pikepdf to prevent ImportError in tests.
+#    If your tests monkeypatch real behavior, this stub won't get in the way.
+# ---------------------------------------------------------------------
+try:
+    import pikepdf  # noqa: F401
+except Exception:
+    class _PikePDFDoc:
+        def __init__(self, *a, **kw): pass
+        def save(self, *a, **kw): pass
+        def close(self): pass
+    sys.modules["pikepdf"] = types.SimpleNamespace(open=lambda *a, **k: _PikePDFDoc())
 
-    sys.modules["pikepdf"] = pike_stub
-# --- end stub ---
-
-def _apply_identity_manager_mocks():
-    """在导入 server 之前，对 IdentityManager 做 enc:base64(json) 打桩。"""
-    def _pack(obj: dict) -> str:
-        return "enc:" + base64.b64encode(json.dumps(obj, sort_keys=True).encode()).decode()
-
-    def _unpack(payload: str) -> dict:
-        if isinstance(payload, bytes):
-            payload = payload.decode()
-        assert isinstance(payload, str) and payload.startswith("enc:")
-        return json.loads(base64.b64decode(payload[4:].encode()).decode())
-
-    def _patch(mod):
-        if not hasattr(mod, "IdentityManager"):
-            return False
-        IM = mod.IdentityManager
-
-        def fake_encrypt_for_server(self, plaintext: dict) -> str:
-            return _pack(plaintext)
-
-        def fake_decrypt_for_server(self, payload: str) -> dict:
-            return _unpack(payload)
-
-        def fake_encrypt_for_client(self, identity: str, plaintext: dict) -> str:
-            return _pack(plaintext)
-
-        def fake_generate_nonce(length: int = 32) -> str:
-            return "N" * length
-
-        IM.encrypt_for_server = fake_encrypt_for_server
-        IM.decrypt_for_server = fake_decrypt_for_server
-        IM.encrypt_for_client = fake_encrypt_for_client
-        setattr(IM, "generate_nonce", fake_generate_nonce)
-        return True
-
-    patched = False
-    for modname in ("src.rmap.identity_manager", "rmap.identity_manager"):
-        try:
-            mod = importlib.import_module(modname)
-            patched = _patch(mod) or patched
-        except Exception:
-            pass
-    return patched
-
-def _patch_pdf_builder():
-    """mock PDF 生成，避免真实算法/系统依赖。"""
-    for modname in ("src.rmap.watermark", "rmap.watermark"):
-        try:
-            wm = importlib.import_module(modname)
-
-            def fake_build_pdf(session_token: str) -> bytes:
-                return b"%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\n%%EOF"
-
-            for fname in ("build_watermarked_pdf", "generate_watermarked_pdf", "create_pdf"):
-                if hasattr(wm, fname):
-                    setattr(wm, fname, fake_build_pdf)
-                    break
-        except Exception:
-            pass
-
-@pytest.fixture(scope="session")
-def app():
-    """先打桩 IdentityManager，再导入 server.create_app。"""
-    os.environ["PYTEST_CURRENT_TEST"] = "1"
-    _apply_identity_manager_mocks()
-    _patch_pdf_builder()
-
-    server = importlib.import_module("src.server")
-    create_app = getattr(server, "create_app")
-
+# ---------------------------------------------------------------------
+# 5) Autouse fixture: keep watermark registry clean between tests
+#    Prevent cross-test pollution when tests register/override methods.
+# ---------------------------------------------------------------------
+@pytest.fixture(autouse=True)
+def _reset_watermark_registry():
     try:
-        flask_app = create_app("testing")
-    except TypeError:
-        flask_app = create_app()
-    flask_app.config.update(TESTING=True)
-    return flask_app
+        import src.watermarking_utils as wu
+    except Exception:
+        # Not all test suites import watermarking_utils; that's fine.
+        yield
+        return
 
-@pytest.fixture()
-def client(app):
-    return app.test_client()
-
-@pytest.fixture
-def mocker(monkeypatch):
-    """简易 mocker 垫片"""
-    class _SimpleMocker:
-        def patch(self, target, new=MagicMock(), **kwargs):
-            mod_name, attr = target.rsplit('.', 1)
-            mod = importlib.import_module(mod_name)
-            monkeypatch.setattr(mod, attr, new)
-            return new
-    return _SimpleMocker()
+    snapshot = dict(wu.METHODS)
+    try:
+        yield
+    finally:
+        wu.METHODS.clear()
+        wu.METHODS.update(snapshot)

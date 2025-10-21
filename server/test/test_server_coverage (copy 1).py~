@@ -233,11 +233,8 @@ class TestInputValidationLogic:
             assert "." in email.split("@")[1]
         
         for email in invalid_emails:
-            local = email.split("@")[0] if "@" in email else ""
-            domain = email.split("@")[-1] if "@" in email else ""
-            has_no_whitespace = not any(ch.isspace() for ch in email)
-            assert not (email and "@" in email and local and "." in domain and has_no_whitespace)
-            
+            assert not (email and "@" in email and "." in email.split("@")[-1])
+
     def test_password_strength_logic(self):
         """测试密码强度逻辑"""
         # 简单的密码检查

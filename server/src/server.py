@@ -45,6 +45,14 @@ try:
 except ImportError:
     WatermarkingMethod = object  # fallback
 
+# ---- constants exposed for tests ----
+SALT_AUTH = "tatou-auth"
+SALT_VERSION = "tatou-version"
+# bytes; 默认与 MAX_UPLOAD_MB=20MB 对齐
+import os as _os
+MAX_UPLOAD_SIZE = int(_os.environ.get("MAX_UPLOAD_MB", "20")) * 1024 * 1024
+
+
 # -----------------------------------------------------------------------------
 # App & Config
 # -----------------------------------------------------------------------------
@@ -64,7 +72,7 @@ def create_app():
         raise ValueError("SECRET_KEY environment variable is required")
     
     app.config["TOKEN_TTL_SECONDS"] = int(os.environ.get("TOKEN_TTL_SECONDS", "86400"))
-    app.config["MAX_UPLOAD_MB"] = int(os.environ.get("MAX_UPLOAD_MB", "20"))
+    app.config["MAX_UPLOAD_MB"] = int(os.environ.get("MAX_UPLOAD_MB", str(MAX_UPLOAD_SIZE // (1024 * 1024))))
 
     # --- 数据库配置 ---
     app.config["DB_HOST"] = os.environ.get("DB_HOST", "127.0.0.1")

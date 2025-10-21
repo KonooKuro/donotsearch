@@ -1,0 +1,1038 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.2, pytest-8.4.2, pluggy-1.6.0 -- /home/lab/Desktop/tatou-team2/venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/lab/Desktop/tatou-team2/server
+configfile: pytest.ini
+testpaths: test
+plugins: cov-7.0.0, flask-1.3.0
+collecting ... collected 150 items
+
+test/test_api.py::test_public_pages SKIPPED (此深度测试套件需要 SQLA...) [  0%]
+test/test_api.py::test_healthz_with_mock_db SKIPPED (此深度测试套件...)  [  1%]
+test/test_api.py::TestUserAuth::test_signup_and_login_flow SKIPPED (...) [  2%]
+test/test_api.py::TestUserAuth::test_unauthorized_access SKIPPED (此...) [  2%]
+test/test_api.py::TestFullWorkflow::test_document_lifecycle SKIPPED      [  3%]
+test/test_hidden.py::test_require_deps PASSED                            [  4%]
+test/test_hidden.py::test_add_watermark_empty_secret PASSED              [  4%]
+test/test_hidden.py::test_add_watermark_root_missing PASSED              [  5%]
+test/test_hidden.py::test_add_watermark_old_make_indirect PASSED         [  6%]
+test/test_hidden.py::test_add_watermark_make_stream PASSED               [  6%]
+test/test_hidden.py::test_add_watermark_old_no_make PASSED               [  7%]
+test/test_hidden.py::test_add_watermark_runtime_error PASSED             [  8%]
+test/test_hidden.py::test_is_applicable_true_false PASSED                [  8%]
+test/test_hidden.py::test_read_secret_root_direct PASSED                 [  9%]
+test/test_hidden.py::test_read_secret_root_indirect PASSED               [ 10%]
+test/test_hidden.py::test_read_secret_scan_objects PASSED                [ 10%]
+test/test_hidden.py::test_read_secret_decode_error PASSED                [ 11%]
+test/test_hidden.py::test_read_secret_fatal_error PASSED                 [ 12%]
+test/test_hidden.py::test_get_usage PASSED                               [ 12%]
+test/test_identity_manager.py::test_init_with_public_only PASSED         [ 13%]
+test/test_identity_manager.py::test_init_with_public_and_private PASSED  [ 14%]
+test/test_identity_manager.py::test_encrypt_for_server PASSED            [ 14%]
+test/test_identity_manager.py::test_decrypt_for_server_no_private PASSED [ 15%]
+test/test_identity_manager.py::test_decrypt_for_server_normal PASSED     [ 16%]
+test/test_identity_manager.py::test_decrypt_for_server_with_passphrase PASSED [ 16%]
+test/test_identity_manager.py::test_encrypt_for_client_missing_key PASSED [ 17%]
+test/test_identity_manager.py::test_encrypt_for_client_success PASSED    [ 18%]
+test/test_rmap.py::test_handle_message1_normal FAILED                    [ 18%]
+test/test_rmap.py::test_handle_message1_exception PASSED                 [ 19%]
+test/test_rmap.py::test_handle_message2_normal PASSED                    [ 20%]
+test/test_rmap.py::test_handle_message2_exception PASSED                 [ 20%]
+test/test_rmap_bad_inputs.py::test_initiate_missing_identity FAILED      [ 21%]
+test/test_rmap_bad_inputs.py::test_respond_missing_payload FAILED        [ 22%]
+test/test_rmap_bad_inputs.py::test_respond_wrong_server_nonce FAILED     [ 22%]
+test/test_rmap_happy_path.py::test_full_handshake FAILED                 [ 23%]
+test/test_rmap_replay_attack.py::test_replay_fails FAILED                [ 24%]
+test/test_rmap_routes.py::test_index_ok PASSED                           [ 24%]
+test/test_rmap_routes.py::test_rmap_initiate_normal PASSED               [ 25%]
+test/test_rmap_routes.py::test_rmap_initiate_exception PASSED            [ 26%]
+test/test_rmap_routes.py::test_rmap_get_link_normal PASSED               [ 26%]
+test/test_rmap_routes.py::test_rmap_get_link_no_session PASSED           [ 27%]
+test/test_rmap_routes.py::test_rmap_get_link_exception PASSED            [ 28%]
+test/test_rmap_routes.py::test_get_version_invalid_sid PASSED            [ 28%]
+test/test_rmap_routes.py::test_get_version_file_not_found PASSED         [ 29%]
+test/test_rmap_routes.py::test_get_version_empty_file PASSED             [ 30%]
+test/test_rmap_routes.py::test_get_version_stat_error FAILED             [ 30%]
+test/test_rmap_routes.py::test_get_version_unexpected_exception PASSED   [ 31%]
+test/test_server_coverage.py::TestUtilityFunctions::test_secure_filename PASSED [ 32%]
+test/test_server_coverage.py::TestUtilityFunctions::test_password_hashing PASSED [ 32%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_wjj_watermark_method_registered PASSED [ 33%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_wjj_watermark_has_correct_name PASSED [ 34%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_wjj_watermark_has_usage PASSED [ 34%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_wjj_watermark_add_and_read PASSED [ 35%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_watermark_applicability PASSED [ 36%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_watermark_with_json_secret PASSED [ 36%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_get_method_helper PASSED [ 37%]
+test/test_server_coverage.py::TestWatermarkIntegration::test_get_method_unknown PASSED [ 38%]
+test/test_server_coverage.py::TestServerHelperFunctions::test_is_pdf_bytes SKIPPED [ 38%]
+test/test_server_coverage.py::TestInputValidationLogic::test_email_validation_logic PASSED [ 39%]
+test/test_server_coverage.py::TestInputValidationLogic::test_password_strength_logic PASSED [ 40%]
+test/test_server_coverage.py::TestWatermarkingUtils::test_methods_registry_not_empty PASSED [ 40%]
+test/test_server_coverage.py::TestWatermarkingUtils::test_register_method_function PASSED [ 41%]
+test/test_server_coverage.py::TestWatermarkingUtils::test_explore_pdf_function PASSED [ 42%]
+test/test_server_coverage.py::TestWatermarkingMethodInterface::test_wjj_method_implements_interface PASSED [ 42%]
+test/test_server_coverage.py::TestPdfSourceHandling::test_load_pdf_bytes_from_bytes PASSED [ 43%]
+test/test_server_coverage.py::TestPdfSourceHandling::test_load_pdf_bytes_from_file PASSED [ 44%]
+test/test_server_coverage.py::TestPdfSourceHandling::test_load_pdf_bytes_from_io PASSED [ 44%]
+test/test_server_coverage.py::TestPdfSourceHandling::test_is_pdf_bytes_function PASSED [ 45%]
+test/test_server_coverage.py::TestEdgeCases::test_empty_secret_handling PASSED [ 46%]
+test/test_server_coverage.py::TestEdgeCases::test_invalid_pdf_handling PASSED [ 46%]
+test/test_server_coverage.py::TestEdgeCases::test_unicode_secret PASSED  [ 47%]
+test/test_server_coverage.py::TestEdgeCases::test_long_secret PASSED     [ 48%]
+test/test_server_coverage.py::TestEdgeCases::test_multiple_watermarks PASSED [ 48%]
+test/test_server_coverage.py::TestExceptionHandling::test_secret_not_found_error PASSED [ 49%]
+test/test_server_coverage.py::TestExceptionHandling::test_corrupted_watermark PASSED [ 50%]
+test/test_server_extra.py::test_missing_secret_key PASSED                [ 50%]
+test/test_server_extra.py::test_healthz_db_down FAILED                   [ 51%]
+test/test_server_extra.py::test_signup_missing_fields PASSED             [ 52%]
+test/test_server_extra.py::test_signup_duplicate_email PASSED            [ 52%]
+test/test_server_extra.py::test_upload_no_file ERROR                     [ 53%]
+test/test_server_extra.py::test_upload_invalid_mime ERROR                [ 54%]
+test/test_server_extra.py::test_watermark_unknown_method ERROR           [ 54%]
+test/test_server_extra.py::test_watermark_internal_error ERROR           [ 55%]
+test/test_server_extra.py::test_token_bad_signature FAILED               [ 56%]
+test/test_server_extra.py::test_token_expired_signature FAILED           [ 56%]
+test/test_server_extra_2.py::test_healthz_ok PASSED                      [ 57%]
+test/test_server_extra_2.py::test_auth_session_bad_token_400 FAILED      [ 58%]
+test/test_server_extra_2.py::test_login_missing_fields PASSED            [ 58%]
+test/test_server_extra_2.py::test_login_nonexistent_user_401 FAILED      [ 59%]
+test/test_server_extra_2.py::test_logout_when_not_logged_in PASSED       [ 60%]
+test/test_server_extra_2.py::test_upload_missing_file_400 PASSED         [ 60%]
+test/test_server_extra_2.py::test_upload_unsupported_mime_415 PASSED     [ 61%]
+test/test_server_extra_2.py::test_upload_filename_with_path_sep PASSED   [ 62%]
+test/test_server_extra_2.py::test_get_document_not_found PASSED          [ 62%]
+test/test_server_extra_2.py::test_list_versions_doc_not_exist FAILED     [ 63%]
+test/test_server_extra_2.py::test_cross_user_access_forbidden FAILED     [ 64%]
+test/test_server_extra_2.py::test_read_watermark_missing_flags FAILED    [ 64%]
+test/test_server_extra_2.py::test_read_watermark_with_nonexistent_link FAILED [ 65%]
+test/test_server_extra_2.py::test_get_version_with_valid_and_invalid_token FAILED [ 66%]
+test/test_server_extra_3.py::test_sqlalchemy_importerror_fallback PASSED [ 66%]
+test/test_server_extra_3.py::test_watermarkingmethod_importerror FAILED  [ 67%]
+test/test_server_extra_3.py::test_version_serializer_function FAILED     [ 68%]
+test/test_server_extra_3.py::test_verify_token_invalid_data FAILED       [ 68%]
+test/test_server_extra_3.py::test_pymysql_fallback_context PASSED        [ 69%]
+test/test_server_versionA_AllPassed.py::test_public_pages SKIPPED (...)  [ 70%]
+test/test_server_versionA_AllPassed.py::test_healthz_with_mock_db SKIPPED [ 70%]
+test/test_server_versionA_AllPassed.py::TestUserAuth::test_signup_and_login_flow SKIPPED [ 71%]
+test/test_server_versionA_AllPassed.py::TestUserAuth::test_unauthorized_access SKIPPED [ 72%]
+test/test_server_versionA_AllPassed.py::TestFullWorkflow::test_document_lifecycle SKIPPED [ 72%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_is_watermark_applicable[Hide_Watermark] PASSED [ 73%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_is_watermark_applicable[wjj-watermark] PASSED [ 74%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_is_watermark_applicable[embedfile-v1] PASSED [ 74%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_add_watermark_and_shape[Hide_Watermark] FAILED [ 75%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_add_watermark_and_shape[wjj-watermark] PASSED [ 76%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_add_watermark_and_shape[embedfile-v1] FAILED [ 76%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_read_secret_roundtrip[Hide_Watermark] FAILED [ 77%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_read_secret_roundtrip[wjj-watermark] PASSED [ 78%]
+test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_read_secret_roundtrip[embedfile-v1] FAILED [ 78%]
+test/test_watermarking_cli.py::test_read_text_from_file PASSED           [ 79%]
+test/test_watermarking_cli.py::test_read_text_from_stdin PASSED          [ 80%]
+test/test_watermarking_cli.py::test_read_text_from_stdin_empty PASSED    [ 80%]
+test/test_watermarking_cli.py::test_resolve_secret_variants PASSED       [ 81%]
+test/test_watermarking_cli.py::test_resolve_key_variants PASSED          [ 82%]
+test/test_watermarking_cli.py::test_cmd_methods PASSED                   [ 82%]
+test/test_watermarking_cli.py::test_cmd_explore_write_file PASSED        [ 83%]
+test/test_watermarking_cli.py::test_cmd_explore_stdout PASSED            [ 84%]
+test/test_watermarking_cli.py::test_cmd_embed_success PASSED             [ 84%]
+test/test_watermarking_cli.py::test_cmd_embed_not_applicable PASSED      [ 85%]
+test/test_watermarking_cli.py::test_cmd_extract_write_file PASSED        [ 86%]
+test/test_watermarking_cli.py::test_cmd_extract_stdout PASSED            [ 86%]
+test/test_watermarking_cli.py::test_main_error_branches[exc0-2-error:] FAILED [ 87%]
+test/test_watermarking_cli.py::test_main_error_branches[exc1-2-error:] FAILED [ 88%]
+test/test_watermarking_cli.py::test_main_error_branches[exc2-3-secret not found] FAILED [ 88%]
+test/test_watermarking_cli.py::test_main_error_branches[exc3-4-invalid key] FAILED [ 89%]
+test/test_watermarking_cli.py::test_main_error_branches[exc4-5-watermarking error] FAILED [ 90%]
+test/test_watermarking_cli.py::test_main_success PASSED                  [ 90%]
+test/test_wm_embedfile.py::test_hmac_hex_both_paths PASSED               [ 91%]
+test/test_wm_embedfile.py::test_is_watermark_applicable_and_exception PASSED [ 92%]
+test/test_wm_embedfile.py::test_add_watermark_with_key_and_capture_attachment PASSED [ 92%]
+test/test_wm_embedfile.py::test_add_watermark_without_key_uses_sha1 PASSED [ 93%]
+test/test_wm_embedfile.py::test_add_watermark_no_pypdf2 PASSED           [ 94%]
+test/test_wm_embedfile.py::test_add_watermark_invalid_secret PASSED      [ 94%]
+test/test_wm_embedfile.py::test_add_watermark_runtime_fail PASSED        [ 95%]
+test/test_wm_embedfile.py::test_try_parse_frame_valid_and_invalid_variants PASSED [ 96%]
+test/test_wm_embedfile.py::test_read_secret_via_attachments_property PASSED [ 96%]
+test/test_wm_embedfile.py::test_read_secret_via_names_tree PASSED        [ 97%]
+test/test_wm_embedfile.py::test_read_secret_via_catalog_AF PASSED        [ 98%]
+test/test_wm_embedfile.py::test_read_secret_attachments_non_bytes_and_decode_error PASSED [ 98%]
+test/test_wm_embedfile.py::test_read_secret_not_found PASSED             [ 99%]
+test/test_wm_embedfile.py::test_get_usage_contains_keywords PASSED       [100%]
+
+==================================== ERRORS ====================================
+____________________ ERROR at setup of test_upload_no_file _____________________
+file /home/lab/Desktop/tatou-team2/server/test/test_server_extra.py, line 44
+  def test_upload_no_file(client, auth_headers):
+E       fixture 'auth_headers' not found
+>       available fixtures: _configure_application, _monkeypatch_response_class, _push_request_context, accept_any, accept_json, accept_jsonp, accept_mimetype, app, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, client, client_class, config, cov, doctest_namespace, live_server, mocker, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/lab/Desktop/tatou-team2/server/test/test_server_extra.py:44
+__________________ ERROR at setup of test_upload_invalid_mime __________________
+file /home/lab/Desktop/tatou-team2/server/test/test_server_extra.py, line 49
+  def test_upload_invalid_mime(client, auth_headers):
+E       fixture 'auth_headers' not found
+>       available fixtures: _configure_application, _monkeypatch_response_class, _push_request_context, accept_any, accept_json, accept_jsonp, accept_mimetype, app, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, client, client_class, config, cov, doctest_namespace, live_server, mocker, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/lab/Desktop/tatou-team2/server/test/test_server_extra.py:49
+_______________ ERROR at setup of test_watermark_unknown_method ________________
+file /home/lab/Desktop/tatou-team2/server/test/test_server_extra.py, line 58
+  def test_watermark_unknown_method(client, auth_headers):
+E       fixture 'auth_headers' not found
+>       available fixtures: _configure_application, _monkeypatch_response_class, _push_request_context, accept_any, accept_json, accept_jsonp, accept_mimetype, app, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, client, client_class, config, cov, doctest_namespace, live_server, mocker, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/lab/Desktop/tatou-team2/server/test/test_server_extra.py:58
+_______________ ERROR at setup of test_watermark_internal_error ________________
+file /home/lab/Desktop/tatou-team2/server/test/test_server_extra.py, line 71
+  def test_watermark_internal_error(client, auth_headers, monkeypatch):
+E       fixture 'auth_headers' not found
+>       available fixtures: _configure_application, _monkeypatch_response_class, _push_request_context, accept_any, accept_json, accept_jsonp, accept_mimetype, app, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, client, client_class, config, cov, doctest_namespace, live_server, mocker, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/home/lab/Desktop/tatou-team2/server/test/test_server_extra.py:71
+=================================== FAILURES ===================================
+_________________________ test_handle_message1_normal __________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85ffe5990>
+
+    def test_handle_message1_normal(monkeypatch):
+        im = DummyIM()
+        r = rmap.RMAP(im)
+    
+        msg1 = {"payload": "abc"}  # 模拟 base64
+        result = r.handle_message1(msg1)
+    
+        # 应包含这四个关键字段
+        assert set(result.keys()) == {"payload", "identity", "nonceClient", "nonceServer"}
+        assert result["identity"] == "clientA"
+        assert result["nonceClient"] == 42
+        # payload 为 base64
+        decoded = base64.b64decode(result["payload"]).decode()
+        assert "clientA" in decoded
+>       assert "nonceServer" in str(result["nonceServer"])
+E       AssertionError: assert 'nonceServer' in '8962502880408489155'
+E        +  where '8962502880408489155' = str(8962502880408489155)
+
+test/test_rmap.py:44: AssertionError
+________________________ test_initiate_missing_identity ________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+
+    def test_initiate_missing_identity(client):
+        # 缺 identity（或为空）应返回 400/422
+        msg1 = _pack({"nonceClient": "1" * 32})
+        r = client.post("/api/rmap-initiate", json={"payload": msg1})
+>       assert r.status_code in (400, 422)
+E       assert 404 in (400, 422)
+E        +  where 404 = <WrapperTestResponse streamed [404 NOT FOUND]>.status_code
+
+test/test_rmap_bad_inputs.py:13: AssertionError
+_________________________ test_respond_missing_payload _________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+
+    def test_respond_missing_payload(client):
+        r = client.post("/api/rmap-get-link", json={})
+>       assert r.status_code in (400, 422)
+E       assert 404 in (400, 422)
+E        +  where 404 = <WrapperTestResponse streamed [404 NOT FOUND]>.status_code
+
+test/test_rmap_bad_inputs.py:17: AssertionError
+_______________________ test_respond_wrong_server_nonce ________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+
+    def test_respond_wrong_server_nonce(client):
+        # 正确的 Step 1，拿到合法的 server_nonce（以及服务端回显的 client_nonce）
+        msg1 = _pack({"identity": "Grp_08", "nonceClient": "1" * 20})
+        r1 = client.post("/api/rmap-initiate", json={"payload": msg1})
+>       assert r1.status_code == 200, r1.data
+E       AssertionError: b'<!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         '
+E       assert 404 == 200
+E        +  where 404 = <WrapperTestResponse streamed [404 NOT FOUND]>.status_code
+
+test/test_rmap_bad_inputs.py:23: AssertionError
+_____________________________ test_full_handshake ______________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+
+    def test_full_handshake(client):
+    
+        nonce_c = "1" * 20
+        msg1 = _pack({"identity": "Grp_08", "nonceClient": nonce_c})
+        r1 = client.post("/api/rmap-initiate", json={"payload": msg1})
+>       assert r1.status_code == 200, r1.data
+E       AssertionError: b'<!doctype html>
+E         <html lang=en>
+E         <title>404 Not Found</title>
+E         <h1>Not Found</h1>
+E         <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+E         '
+E       assert 404 == 200
+E        +  where 404 = <WrapperTestResponse streamed [404 NOT FOUND]>.status_code
+
+test/test_rmap_happy_path.py:16: AssertionError
+______________________________ test_replay_fails _______________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+
+    def test_replay_fails(client):
+>       token = _handshake(client)
+                ^^^^^^^^^^^^^^^^^^
+
+test/test_rmap_replay_attack.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <FlaskClient <Flask 'src.server'>>
+
+    def _handshake(client):
+        r1 = client.post("/api/rmap-initiate", json={"client_pubkey_id": "Grp_08"})
+>       s1 = json.loads(base64.b64decode(r1.get_json()["payload"][4:].encode()).decode())
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'NoneType' object is not subscriptable
+
+test/test_rmap_replay_attack.py:5: TypeError
+_________________________ test_get_version_stat_error __________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85feea910>
+tmp_path = PosixPath('/tmp/pytest-of-lab/pytest-67/test_get_version_stat_error0')
+client = <FlaskClient <Flask 'test_rmap_routes'>>
+
+    def test_get_version_stat_error(monkeypatch, tmp_path, client):
+        sid = "c" * 32
+        f = tmp_path / f"{sid}.pdf"
+        f.write_bytes(b"abc")
+        # 指向临时输出目录
+        monkeypatch.setattr(rr, "PDF_OUT_DIR", tmp_path)
+    
+        # 仅在 rr 模块内拦截 os.stat，且兼容 follow_symlinks 等可选参数
+        orig_stat = rr.os.stat
+    
+        def fake_stat(path, *args, **kwargs):
+            # 只对这个目标文件制造 OSError，其它路径走原始 stat
+            if Path(path) == f:
+                raise OSError("nope")
+            return orig_stat(path, *args, **kwargs)
+    
+        monkeypatch.setattr(rr.os, "stat", fake_stat)
+    
+        resp = client.get(f"/get-version/{sid}")
+>       assert resp.status_code == 200  # 路由里对 stat 失败做了降级处理
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 500 == 200
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+test/test_rmap_routes.py:148: AssertionError
+----------------------------- Captured stdout call -----------------------------
+[RMAP] api_get_version sid='cccccccccccccccccccccccccccccccc'
+[RMAP] target path = /tmp/pytest-of-lab/pytest-67/test_get_version_stat_error0/cccccccccccccccccccccccccccccccc.pdf
+[RMAP] api_get_version ERROR: nope
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/rmap_routes.py", line 182, in api_get_version
+    if not path.exists():
+           ^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1236, in exists
+    self.stat()
+  File "/usr/lib/python3.11/pathlib.py", line 1014, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/test/test_rmap_routes.py", line 142, in fake_stat
+    raise OSError("nope")
+OSError: nope
+_____________________________ test_healthz_db_down _____________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe86007be50>
+
+    def test_healthz_db_down(client, monkeypatch):
+>       with patch("server.get_engine", side_effect=RuntimeError("DB fail")):
+
+test/test_server_extra.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.11/unittest/mock.py:1437: in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <unittest.mock._patch object at 0x7fe860079510>
+
+    def get_original(self):
+        target = self.getter()
+        name = self.attribute
+    
+        original = DEFAULT
+        local = False
+    
+        try:
+            original = target.__dict__[name]
+        except (AttributeError, KeyError):
+            original = getattr(target, name, DEFAULT)
+        else:
+            local = True
+    
+        if name in _builtins and isinstance(target, ModuleType):
+            self.create = True
+    
+        if not self.create and original is DEFAULT:
+>           raise AttributeError(
+                "%s does not have the attribute %r" % (target, name)
+            )
+E           AttributeError: <module 'server' from '/home/lab/Desktop/tatou-team2/server/src/server.py'> does not have the attribute 'get_engine'
+
+/usr/lib/python3.11/unittest/mock.py:1410: AttributeError
+___________________________ test_token_bad_signature ___________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe860094d90>
+
+    def test_token_bad_signature(client, monkeypatch):
+>       s = server._version_serializer()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'server' has no attribute '_version_serializer'
+
+test/test_server_extra.py:87: AttributeError
+_________________________ test_token_expired_signature _________________________
+
+client = <FlaskClient <Flask 'src.server'>>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe8600978d0>
+
+    def test_token_expired_signature(client, monkeypatch):
+>       s = server._version_serializer()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'server' has no attribute '_version_serializer'
+
+test/test_server_extra.py:94: AttributeError
+_______________________ test_auth_session_bad_token_400 ________________________
+
+client = <FlaskClient <Flask 'server'>>
+
+    def test_auth_session_bad_token_400(client):
+        r = client.post("/auth/session", json={"token": "bad.token"})
+>       assert r.status_code in (400, 401)
+E       assert 200 in (400, 401)
+E        +  where 200 = <WrapperTestResponse streamed [200 OK]>.status_code
+
+test/test_server_extra_2.py:51: AssertionError
+_______________________ test_login_nonexistent_user_401 ________________________
+
+client = <FlaskClient <Flask 'server'>>
+
+    def test_login_nonexistent_user_401(client):
+        r = client.post("/api/login", json={"email": "nouser@example.com", "password": "x"})
+>       assert r.status_code in (400, 401)
+E       assert 503 in (400, 401)
+E        +  where 503 = <WrapperTestResponse streamed [503 SERVICE UNAVAILABLE]>.status_code
+
+test/test_server_extra_2.py:62: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    server:server.py:429 Login query failed
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 661, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 416, in login
+    with db_connect() as conn:
+  File "/usr/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 126, in db_connect
+    conn = pymysql.connect(
+           ^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 365, in __init__
+    self.connect()
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'mock' ([Errno -2] Name or service not known)")
+_______________________ test_list_versions_doc_not_exist _______________________
+
+client = <FlaskClient <Flask 'server'>>
+auth_headers = {'Authorization': 'Bearer eyJ1aWQiOjEsImxvZ2luIjoidTEiLCJlbWFpbCI6InUxQGV4YW1wbGUuY29tIiwicm9sZXMiOltdfQ.aPe5MA.SkvKNBfMRqUNZRAj4NcUvHVkwLA'}
+
+    def test_list_versions_doc_not_exist(client, auth_headers):
+        r = client.get("/api/list-versions/888888", headers=auth_headers)
+>       assert r.status_code in (403, 404, 503)
+E       assert 500 in (403, 404, 503)
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+test/test_server_extra_2.py:112: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    server:server.py:812 DB error listing versions
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 661, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 791, in list_versions
+    with db_connect() as conn:
+  File "/usr/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 126, in db_connect
+    conn = pymysql.connect(
+           ^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 365, in __init__
+    self.connect()
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'mock' ([Errno -2] Name or service not known)")
+_______________________ test_cross_user_access_forbidden _______________________
+
+app = <Flask 'server'>, client = <FlaskClient <Flask 'server'>>
+
+    def test_cross_user_access_forbidden(app, client):
+        # 用户1 上传
+        t1 = _make_auth_token(app.config["SECRET_KEY"], uid=1, login="u1", email="u1@example.com")
+        r1 = client.post(
+            "/api/upload-document",
+            headers={"Authorization": f"Bearer {t1}"},
+            data={"file": (io.BytesIO(MIN_PDF), "u1.pdf", "application/pdf"), "name": "u1.pdf"},
+            content_type="multipart/form-data",
+        )
+>       assert r1.status_code == 201
+E       assert 500 == 201
+E        +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+
+test/test_server_extra_2.py:126: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    server:server.py:613 upload: db insert failed
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 661, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 604, in upload_document
+    with db_connect() as conn:
+  File "/usr/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 126, in db_connect
+    conn = pymysql.connect(
+           ^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 365, in __init__
+    self.connect()
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'mock' ([Errno -2] Name or service not known)")
+______________________ test_read_watermark_missing_flags _______________________
+
+client = <FlaskClient <Flask 'server'>>
+auth_headers = {'Authorization': 'Bearer eyJ1aWQiOjEsImxvZ2luIjoidTEiLCJlbWFpbCI6InUxQGV4YW1wbGUuY29tIiwicm9sZXMiOltdfQ.aPe5MA.SkvKNBfMRqUNZRAj4NcUvHVkwLA'}
+
+    def test_read_watermark_missing_flags(client, auth_headers):
+        # 先上传
+        r = client.post(
+            "/api/upload-document",
+            headers=auth_headers,
+            data={"file": (io.BytesIO(MIN_PDF), "a.pdf", "application/pdf"), "name": "a.pdf"},
+            content_type="multipart/form-data",
+        )
+>       did = r.get_json()["id"]
+              ^^^^^^^^^^^^^^^^^^
+E       KeyError: 'id'
+
+test/test_server_extra_2.py:149: KeyError
+------------------------------ Captured log call -------------------------------
+ERROR    server:server.py:613 upload: db insert failed
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 661, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 604, in upload_document
+    with db_connect() as conn:
+  File "/usr/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 126, in db_connect
+    conn = pymysql.connect(
+           ^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 365, in __init__
+    self.connect()
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'mock' ([Errno -2] Name or service not known)")
+__________________ test_read_watermark_with_nonexistent_link ___________________
+
+client = <FlaskClient <Flask 'server'>>
+auth_headers = {'Authorization': 'Bearer eyJ1aWQiOjEsImxvZ2luIjoidTEiLCJlbWFpbCI6InUxQGV4YW1wbGUuY29tIiwicm9sZXMiOltdfQ.aPe5MA.SkvKNBfMRqUNZRAj4NcUvHVkwLA'}
+
+    def test_read_watermark_with_nonexistent_link(client, auth_headers):
+        # 先上传
+        r = client.post(
+            "/api/upload-document",
+            headers=auth_headers,
+            data={"file": (io.BytesIO(MIN_PDF), "b.pdf", "application/pdf"), "name": "b.pdf"},
+            content_type="multipart/form-data",
+        )
+>       did = r.get_json()["id"]
+              ^^^^^^^^^^^^^^^^^^
+E       KeyError: 'id'
+
+test/test_server_extra_2.py:166: KeyError
+------------------------------ Captured log call -------------------------------
+ERROR    server:server.py:613 upload: db insert failed
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 661, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 604, in upload_document
+    with db_connect() as conn:
+  File "/usr/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 126, in db_connect
+    conn = pymysql.connect(
+           ^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 365, in __init__
+    self.connect()
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'mock' ([Errno -2] Name or service not known)")
+________________ test_get_version_with_valid_and_invalid_token _________________
+
+client = <FlaskClient <Flask 'server'>>
+auth_headers = {'Authorization': 'Bearer eyJ1aWQiOjEsImxvZ2luIjoidTEiLCJlbWFpbCI6InUxQGV4YW1wbGUuY29tIiwicm9sZXMiOltdfQ.aPe5MA.SkvKNBfMRqUNZRAj4NcUvHVkwLA'}
+app = <Flask 'server'>
+
+    def test_get_version_with_valid_and_invalid_token(client, auth_headers, app):
+        # 上传 + 创建一个版本（不要求真实水印实现成功；失败也能覆盖错误分支）
+        r = client.post(
+            "/api/upload-document",
+            headers=auth_headers,
+            data={"file": (io.BytesIO(MIN_PDF), "c.pdf", "application/pdf"), "name": "c.pdf"},
+            content_type="multipart/form-data",
+        )
+>       did = r.get_json()["id"]
+              ^^^^^^^^^^^^^^^^^^
+E       KeyError: 'id'
+
+test/test_server_extra_2.py:186: KeyError
+------------------------------ Captured log call -------------------------------
+ERROR    server:server.py:613 upload: db insert failed
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 661, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 827, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 604, in upload_document
+    with db_connect() as conn:
+  File "/usr/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/server/src/server.py", line 126, in db_connect
+    conn = pymysql.connect(
+           ^^^^^^^^^^^^^^^^
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 365, in __init__
+    self.connect()
+  File "/home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pymysql/connections.py", line 723, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'mock' ([Errno -2] Name or service not known)")
+_____________________ test_watermarkingmethod_importerror ______________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85fb49210>
+
+    def test_watermarkingmethod_importerror(monkeypatch):
+        """触发 WatermarkingMethod fallback (45–46)。"""
+        monkeypatch.setitem(server.__dict__, "WatermarkingMethod", None)
+        with pytest.MonkeyPatch.context() as m:
+            m.setitem(server.__dict__, "WatermarkingMethod", None)
+            try:
+                raise ImportError()
+            except ImportError:
+                server.WatermarkingMethod = object
+>       assert server.WatermarkingMethod is object
+E       assert None is object
+E        +  where None = server.WatermarkingMethod
+
+test/test_server_extra_3.py:45: AssertionError
+_______________________ test_version_serializer_function _______________________
+
+app = <Flask 'src.server'>
+
+    def test_version_serializer_function(app):
+        """直接调用 _version_serializer 以覆盖 (144)。"""
+        vs = server.URLSafeTimedSerializer(app.config["SECRET_KEY"], salt="tatou-version")
+        # 确认可生成
+>       s = server._version_serializer()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'server' has no attribute '_version_serializer'
+
+test/test_server_extra_3.py:52: AttributeError
+________________________ test_verify_token_invalid_data ________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85febb510>
+
+    def test_verify_token_invalid_data(monkeypatch):
+        """触发 _verify_token 返回 None 分支 (157)。"""
+        fake_ser = types.SimpleNamespace(loads=lambda token, max_age: "not a dict")
+>       monkeypatch.setattr(server, "_serializer", lambda: fake_ser)
+E       AttributeError: <module 'server' from '/home/lab/Desktop/tatou-team2/server/src/server.py'> has no attribute '_serializer'
+
+test/test_server_extra_3.py:59: AttributeError
+___ TestAllWatermarkingMethods.test_add_watermark_and_shape[Hide_Watermark] ____
+
+self = <test_watermarking_all_methods.TestAllWatermarkingMethods object at 0x7fe86011cb10>
+method_name = 'Hide_Watermark'
+impl = <hidden.HiddenObjectB64Method object at 0x7fe8605496d0>
+sample_pdf_path = PosixPath('/tmp/pytest-of-lab/pytest-67/pdfs0/sample.pdf')
+secret = 'unit-test-secret', key = 'unit-test-key'
+
+    def test_add_watermark_and_shape(self, method_name: str, impl: object, sample_pdf_path: Path, secret: str, key: str):
+        wm_impl = _as_instance(impl)
+        if not wm_impl.is_watermark_applicable(sample_pdf_path, position=None):
+            pytest.skip(f"{method_name}: not applicable to the sample PDF")
+        original = sample_pdf_path.read_bytes()
+>       out_bytes = wm_impl.add_watermark(sample_pdf_path, secret=secret, key=key, position=None)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: HiddenObjectB64Method.add_watermark() got an unexpected keyword argument 'key'
+
+test/test_watermarking_all_methods.py:84: TypeError
+____ TestAllWatermarkingMethods.test_add_watermark_and_shape[embedfile-v1] _____
+
+self = <test_watermarking_all_methods.TestAllWatermarkingMethods object at 0x7fe86011cd90>
+method_name = 'embedfile-v1'
+impl = <watermark_JunyiShen.wm_embedfile_v1.EmbedFileV1 object at 0x7fe86054b590>
+sample_pdf_path = PosixPath('/tmp/pytest-of-lab/pytest-67/pdfs0/sample.pdf')
+secret = 'unit-test-secret', key = 'unit-test-key'
+
+    def test_add_watermark_and_shape(self, method_name: str, impl: object, sample_pdf_path: Path, secret: str, key: str):
+        wm_impl = _as_instance(impl)
+        if not wm_impl.is_watermark_applicable(sample_pdf_path, position=None):
+            pytest.skip(f"{method_name}: not applicable to the sample PDF")
+        original = sample_pdf_path.read_bytes()
+>       out_bytes = wm_impl.add_watermark(sample_pdf_path, secret=secret, key=key, position=None)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test/test_watermarking_all_methods.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <watermark_JunyiShen.wm_embedfile_v1.EmbedFileV1 object at 0x7fe86054b590>
+pdf = PosixPath('/tmp/pytest-of-lab/pytest-67/pdfs0/sample.pdf')
+secret = 'unit-test-secret', position = None, key = 'unit-test-key'
+
+    def add_watermark(self, pdf: PdfSource, secret: str,
+                      position: Optional[str]=None, key: Optional[str]=None) -> bytes:
+        if PdfReader is None or PdfWriter is None:
+>           raise WatermarkingError("PyPDF2 is required (add PyPDF2>=3.0.0).")
+E           watermarking_method.WatermarkingError: PyPDF2 is required (add PyPDF2>=3.0.0).
+
+src/watermark_JunyiShen/wm_embedfile_v1.py:53: WatermarkingError
+____ TestAllWatermarkingMethods.test_read_secret_roundtrip[Hide_Watermark] _____
+
+self = <test_watermarking_all_methods.TestAllWatermarkingMethods object at 0x7fe86011d6d0>
+method_name = 'Hide_Watermark'
+impl = <hidden.HiddenObjectB64Method object at 0x7fe8605496d0>
+sample_pdf_path = PosixPath('/tmp/pytest-of-lab/pytest-67/pdfs0/sample.pdf')
+secret = 'unit-test-secret', key = 'unit-test-key'
+tmp_path = PosixPath('/tmp/pytest-of-lab/pytest-67/test_read_secret_roundtrip_Hid0')
+
+    def test_read_secret_roundtrip(self, method_name: str, impl: object, sample_pdf_path: Path, secret: str, key: str, tmp_path: Path):
+        wm_impl = _as_instance(impl)
+        if not wm_impl.is_watermark_applicable(sample_pdf_path, position=None):
+            pytest.skip(f"{method_name}: not applicable to the sample PDF")
+        out_pdf = tmp_path / f"{method_name}_watermarked.pdf"
+>       out_pdf.write_bytes(wm_impl.add_watermark(sample_pdf_path, secret=secret, key=key, position=None))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: HiddenObjectB64Method.add_watermark() got an unexpected keyword argument 'key'
+
+test/test_watermarking_all_methods.py:94: TypeError
+_____ TestAllWatermarkingMethods.test_read_secret_roundtrip[embedfile-v1] ______
+
+self = <test_watermarking_all_methods.TestAllWatermarkingMethods object at 0x7fe86011d9d0>
+method_name = 'embedfile-v1'
+impl = <watermark_JunyiShen.wm_embedfile_v1.EmbedFileV1 object at 0x7fe86054b590>
+sample_pdf_path = PosixPath('/tmp/pytest-of-lab/pytest-67/pdfs0/sample.pdf')
+secret = 'unit-test-secret', key = 'unit-test-key'
+tmp_path = PosixPath('/tmp/pytest-of-lab/pytest-67/test_read_secret_roundtrip_emb0')
+
+    def test_read_secret_roundtrip(self, method_name: str, impl: object, sample_pdf_path: Path, secret: str, key: str, tmp_path: Path):
+        wm_impl = _as_instance(impl)
+        if not wm_impl.is_watermark_applicable(sample_pdf_path, position=None):
+            pytest.skip(f"{method_name}: not applicable to the sample PDF")
+        out_pdf = tmp_path / f"{method_name}_watermarked.pdf"
+>       out_pdf.write_bytes(wm_impl.add_watermark(sample_pdf_path, secret=secret, key=key, position=None))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test/test_watermarking_all_methods.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <watermark_JunyiShen.wm_embedfile_v1.EmbedFileV1 object at 0x7fe86054b590>
+pdf = PosixPath('/tmp/pytest-of-lab/pytest-67/pdfs0/sample.pdf')
+secret = 'unit-test-secret', position = None, key = 'unit-test-key'
+
+    def add_watermark(self, pdf: PdfSource, secret: str,
+                      position: Optional[str]=None, key: Optional[str]=None) -> bytes:
+        if PdfReader is None or PdfWriter is None:
+>           raise WatermarkingError("PyPDF2 is required (add PyPDF2>=3.0.0).")
+E           watermarking_method.WatermarkingError: PyPDF2 is required (add PyPDF2>=3.0.0).
+
+src/watermark_JunyiShen/wm_embedfile_v1.py:53: WatermarkingError
+___________________ test_main_error_branches[exc0-2-error:] ____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85fb73c90>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe85fb4af50>
+exc = FileNotFoundError('no file'), code = 2, msg = 'error:'
+
+    @pytest.mark.parametrize(
+        "exc,code,msg",
+        [
+            (FileNotFoundError("no file"), 2, "error:"),
+            (ValueError("bad val"), 2, "error:"),
+            (cli.SecretNotFoundError("x"), 3, "secret not found"),
+            (cli.InvalidKeyError("x"), 4, "invalid key"),
+            (cli.WatermarkingError("x"), 5, "watermarking error"),
+        ],
+    )
+    def test_main_error_branches(monkeypatch, capsys, exc, code, msg):
+        def fake_func(_args): raise exc
+        parser = cli.build_parser()
+        args = parser.parse_args(["methods"])
+        args.func = fake_func
+        monkeypatch.setattr(cli, "build_parser", lambda : parser)
+        ret = cli.main(["methods"])
+        out = capsys.readouterr().out + capsys.readouterr().err
+>       assert ret == code
+E       assert 0 == 2
+
+test/test_watermarking_cli.py:167: AssertionError
+___________________ test_main_error_branches[exc1-2-error:] ____________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85fe94090>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe85fe94590>
+exc = ValueError('bad val'), code = 2, msg = 'error:'
+
+    @pytest.mark.parametrize(
+        "exc,code,msg",
+        [
+            (FileNotFoundError("no file"), 2, "error:"),
+            (ValueError("bad val"), 2, "error:"),
+            (cli.SecretNotFoundError("x"), 3, "secret not found"),
+            (cli.InvalidKeyError("x"), 4, "invalid key"),
+            (cli.WatermarkingError("x"), 5, "watermarking error"),
+        ],
+    )
+    def test_main_error_branches(monkeypatch, capsys, exc, code, msg):
+        def fake_func(_args): raise exc
+        parser = cli.build_parser()
+        args = parser.parse_args(["methods"])
+        args.func = fake_func
+        monkeypatch.setattr(cli, "build_parser", lambda : parser)
+        ret = cli.main(["methods"])
+        out = capsys.readouterr().out + capsys.readouterr().err
+>       assert ret == code
+E       assert 0 == 2
+
+test/test_watermarking_cli.py:167: AssertionError
+______________ test_main_error_branches[exc2-3-secret not found] _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe8614365d0>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe86110ca90>
+exc = SecretNotFoundError('x'), code = 3, msg = 'secret not found'
+
+    @pytest.mark.parametrize(
+        "exc,code,msg",
+        [
+            (FileNotFoundError("no file"), 2, "error:"),
+            (ValueError("bad val"), 2, "error:"),
+            (cli.SecretNotFoundError("x"), 3, "secret not found"),
+            (cli.InvalidKeyError("x"), 4, "invalid key"),
+            (cli.WatermarkingError("x"), 5, "watermarking error"),
+        ],
+    )
+    def test_main_error_branches(monkeypatch, capsys, exc, code, msg):
+        def fake_func(_args): raise exc
+        parser = cli.build_parser()
+        args = parser.parse_args(["methods"])
+        args.func = fake_func
+        monkeypatch.setattr(cli, "build_parser", lambda : parser)
+        ret = cli.main(["methods"])
+        out = capsys.readouterr().out + capsys.readouterr().err
+>       assert ret == code
+E       assert 0 == 3
+
+test/test_watermarking_cli.py:167: AssertionError
+_________________ test_main_error_branches[exc3-4-invalid key] _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe861435a50>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe86144b150>
+exc = InvalidKeyError('x'), code = 4, msg = 'invalid key'
+
+    @pytest.mark.parametrize(
+        "exc,code,msg",
+        [
+            (FileNotFoundError("no file"), 2, "error:"),
+            (ValueError("bad val"), 2, "error:"),
+            (cli.SecretNotFoundError("x"), 3, "secret not found"),
+            (cli.InvalidKeyError("x"), 4, "invalid key"),
+            (cli.WatermarkingError("x"), 5, "watermarking error"),
+        ],
+    )
+    def test_main_error_branches(monkeypatch, capsys, exc, code, msg):
+        def fake_func(_args): raise exc
+        parser = cli.build_parser()
+        args = parser.parse_args(["methods"])
+        args.func = fake_func
+        monkeypatch.setattr(cli, "build_parser", lambda : parser)
+        ret = cli.main(["methods"])
+        out = capsys.readouterr().out + capsys.readouterr().err
+>       assert ret == code
+E       assert 0 == 4
+
+test/test_watermarking_cli.py:167: AssertionError
+_____________ test_main_error_branches[exc4-5-watermarking error] ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe85fe9f490>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe85fe9fdd0>
+exc = WatermarkingError('x'), code = 5, msg = 'watermarking error'
+
+    @pytest.mark.parametrize(
+        "exc,code,msg",
+        [
+            (FileNotFoundError("no file"), 2, "error:"),
+            (ValueError("bad val"), 2, "error:"),
+            (cli.SecretNotFoundError("x"), 3, "secret not found"),
+            (cli.InvalidKeyError("x"), 4, "invalid key"),
+            (cli.WatermarkingError("x"), 5, "watermarking error"),
+        ],
+    )
+    def test_main_error_branches(monkeypatch, capsys, exc, code, msg):
+        def fake_func(_args): raise exc
+        parser = cli.build_parser()
+        args = parser.parse_args(["methods"])
+        args.func = fake_func
+        monkeypatch.setattr(cli, "build_parser", lambda : parser)
+        ret = cli.main(["methods"])
+        out = capsys.readouterr().out + capsys.readouterr().err
+>       assert ret == code
+E       assert 0 == 5
+
+test/test_watermarking_cli.py:167: AssertionError
+=============================== warnings summary ===============================
+../venv/lib/python3.11/site-packages/pgpy/constants.py:5
+  /home/lab/Desktop/tatou-team2/venv/lib/python3.11/site-packages/pgpy/constants.py:5: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.11.2-final-0 ________________
+
+Name                                         Stmts   Miss  Cover
+----------------------------------------------------------------
+src/hidden.py                                  102     10    90%
+src/rmap/__init__.py                             0      0   100%
+src/rmap/identity_manager.py                    38      0   100%
+src/rmap/rmap.py                                22      0   100%
+src/rmap_routes.py                             106      6    94%
+src/server.py                                  751    492    34%
+src/watermark_JunyiShen/wm_embedfile_v1.py     127     18    86%
+src/watermarking_cli.py                        126     16    87%
+src/watermarking_method.py                      39      5    87%
+src/watermarking_utils.py                       90     24    73%
+src/wjj_watermark.py                            71     14    80%
+----------------------------------------------------------------
+TOTAL                                         1472    585    60%
+Coverage HTML written to dir htmlcov
+=========================== short test summary info ============================
+FAILED test/test_rmap.py::test_handle_message1_normal - AssertionError: asser...
+FAILED test/test_rmap_bad_inputs.py::test_initiate_missing_identity - assert ...
+FAILED test/test_rmap_bad_inputs.py::test_respond_missing_payload - assert 40...
+FAILED test/test_rmap_bad_inputs.py::test_respond_wrong_server_nonce - Assert...
+FAILED test/test_rmap_happy_path.py::test_full_handshake - AssertionError: b'...
+FAILED test/test_rmap_replay_attack.py::test_replay_fails - TypeError: 'NoneT...
+FAILED test/test_rmap_routes.py::test_get_version_stat_error - assert 500 == 200
+FAILED test/test_server_extra.py::test_healthz_db_down - AttributeError: <mod...
+FAILED test/test_server_extra.py::test_token_bad_signature - AttributeError: ...
+FAILED test/test_server_extra.py::test_token_expired_signature - AttributeErr...
+FAILED test/test_server_extra_2.py::test_auth_session_bad_token_400 - assert ...
+FAILED test/test_server_extra_2.py::test_login_nonexistent_user_401 - assert ...
+FAILED test/test_server_extra_2.py::test_list_versions_doc_not_exist - assert...
+FAILED test/test_server_extra_2.py::test_cross_user_access_forbidden - assert...
+FAILED test/test_server_extra_2.py::test_read_watermark_missing_flags - KeyEr...
+FAILED test/test_server_extra_2.py::test_read_watermark_with_nonexistent_link
+FAILED test/test_server_extra_2.py::test_get_version_with_valid_and_invalid_token
+FAILED test/test_server_extra_3.py::test_watermarkingmethod_importerror - ass...
+FAILED test/test_server_extra_3.py::test_version_serializer_function - Attrib...
+FAILED test/test_server_extra_3.py::test_verify_token_invalid_data - Attribut...
+FAILED test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_add_watermark_and_shape[Hide_Watermark]
+FAILED test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_add_watermark_and_shape[embedfile-v1]
+FAILED test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_read_secret_roundtrip[Hide_Watermark]
+FAILED test/test_watermarking_all_methods.py::TestAllWatermarkingMethods::test_read_secret_roundtrip[embedfile-v1]
+FAILED test/test_watermarking_cli.py::test_main_error_branches[exc0-2-error:]
+FAILED test/test_watermarking_cli.py::test_main_error_branches[exc1-2-error:]
+FAILED test/test_watermarking_cli.py::test_main_error_branches[exc2-3-secret not found]
+FAILED test/test_watermarking_cli.py::test_main_error_branches[exc3-4-invalid key]
+FAILED test/test_watermarking_cli.py::test_main_error_branches[exc4-5-watermarking error]
+ERROR test/test_server_extra.py::test_upload_no_file
+ERROR test/test_server_extra.py::test_upload_invalid_mime
+ERROR test/test_server_extra.py::test_watermark_unknown_method
+ERROR test/test_server_extra.py::test_watermark_internal_error
+======= 29 failed, 106 passed, 11 skipped, 1 warning, 4 errors in 2.39s ========
