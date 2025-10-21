@@ -1,0 +1,7 @@
+pytest
+pytest-cov
+pytest-flask
+pytest-mock
+requests
+itsdangerous
+pgpy

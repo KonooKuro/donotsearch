@@ -1,10 +1,14 @@
 from __future__ import annotations
+from watermarking_method import WatermarkingError
+
 
 import base64
 import json
+from typing import Optional
 
 from watermarking_method import (
     WatermarkingMethod,
+    PdfSource,
     load_pdf_bytes,
     is_pdf_bytes,
     SecretNotFoundError,
@@ -13,9 +17,8 @@ from watermarking_method import (
 
 
 class WJJWatermarkMethod(WatermarkingMethod):
-    """Simple, deterministic inline watermark. Ignores 'key' and 'position'."""
+    """Simple, deterministic inline watermark."""
 
-    # 稳定注册名
     name = "wjj-watermark"
 
     @staticmethod
@@ -32,19 +35,31 @@ class WJJWatermarkMethod(WatermarkingMethod):
 
     def add_watermark(
         self,
-        pdf,
+        pdf: PdfSource,
         secret: str,
-        key: str,
-        position: str | None = None,
+        position: Optional[str] = None,
+        key: Optional[str] = None,  # 添加 key 参数以兼容测试框架
     ) -> bytes:
+        """添加水印到PDF"""
+        # 验证输入
+        if not isinstance(secret, str) or not secret:
+            raise WatermarkingError("Secret must be a non-empty string")
+        
         # 读取 PDF 字节
-        data = load_pdf_bytes(pdf)
+        try:
+            data = load_pdf_bytes(pdf)
+        except (ValueError, TypeError) as e:
+            raise WatermarkingError("Invalid PDF input") from e
+        
+        # 确保是有效的PDF
+        if not is_pdf_bytes(data):
+            raise WatermarkingError("Input is not a valid PDF")
 
         # secret 可能已是 JSON；否则包一层
         try:
             parsed = json.loads(secret)
             payload = parsed if isinstance(parsed, dict) else {"secret": secret, "intended_for": None}
-        except Exception:
+        except (json.JSONDecodeError, ValueError):
             payload = {"secret": secret, "intended_for": None}
 
         # JSON → Base64
@@ -59,19 +74,44 @@ class WJJWatermarkMethod(WatermarkingMethod):
         else:
             new_data = data + marker + b"\n%%EOF\n"
 
+        # 确保输出仍然是有效的PDF
+        if not new_data.startswith(b"%PDF-"):
+            raise WatermarkingError("Output is not a valid PDF")
+            
         return new_data
 
-    def is_watermark_applicable(self, pdf, position: str | None = None) -> bool:
+    def is_watermark_applicable(
+        self, 
+        pdf: PdfSource, 
+        position: Optional[str] = None
+    ) -> bool:
+        """检查水印方法是否适用于给定PDF"""
         try:
             data = load_pdf_bytes(pdf)
-            return is_pdf_bytes(data)
+            # 基本的PDF验证
+            if not is_pdf_bytes(data):
+                return False
+            # 确保PDF有最小长度
+            if len(data) < 50:
+                return False
+            return True
         except Exception:
             return False
 
-    def read_secret(self, pdf, key: str) -> str:
-        """Find marker and return the JSON string payload."""
+    def read_secret(
+        self, 
+        pdf: PdfSource, 
+        key: Optional[str] = None  # 添加 key 参数以兼容测试框架
+    ) -> str:
+        """从PDF中提取水印
+        
+        返回值说明：
+        - 如果水印是 JSON 格式且包含 'secret' 字段，返回该字段的值
+        - 否则返回完整的水印内容（可能是 JSON 字符串或普通字符串）
+        """
         data = load_pdf_bytes(pdf)
 
+        # 查找最后一个水印标记（支持多次水印）
         start_idx = data.rfind(self._START)
         if start_idx == -1:
             raise SecretNotFoundError("WJJ watermark start marker not found")
@@ -81,20 +121,27 @@ class WJJWatermarkMethod(WatermarkingMethod):
             raise SecretNotFoundError("WJJ watermark end marker not found")
 
         b64 = data[start_idx + len(self._START) : end_idx]
+        
+        # 解码 Base64
         try:
             payload_bytes = base64.b64decode(b64, validate=True)
         except Exception as e:
             raise WatermarkingError(f"Failed to base64-decode WJJ watermark payload: {e}")
 
+        # 解码 UTF-8
         try:
             payload_str = payload_bytes.decode("utf-8")
         except Exception as e:
             raise WatermarkingError(f"Failed to decode WJJ payload utf-8: {e}")
 
-        # 尝试验证 JSON，但即便失败也直接返回字符串
+        # 尝试解析 JSON 并提取 secret 字段
         try:
-            json.loads(payload_str)
-        except Exception:
-            pass
-
-        return payload_str
+            payload = json.loads(payload_str)
+            # 如果是字典且包含 secret 字段，返回该字段
+            if isinstance(payload, dict) and "secret" in payload:
+                return payload["secret"]
+            # 如果是其他 JSON 类型，返回字符串形式
+            return payload_str
+        except (json.JSONDecodeError, ValueError):
+            # 如果不是有效的JSON，返回原始字符串
+            return payload_str
